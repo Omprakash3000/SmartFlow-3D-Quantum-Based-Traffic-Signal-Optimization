@@ -1,0 +1,17 @@
+{
+  "name": "smartflow3d-frontend",
+  "version": "1.0.0",
+  "description": "SmartFlow 3D - Intelligent Urban Traffic Simulation & Adaptive Signal Control Interface",
+  "scripts": {
+    "start": "npx -y serve . -p 3000",
+    "dev": "npx -y serve . -p 3000"
+  },
+  "keywords": [
+    "traffic-simulation",
+    "signal-control",
+    "urban-mobility",
+    "3d-canvas"
+  ],
+  "author": "SmartFlow3D Team",
+  "license": "UNLICENSED"
+}

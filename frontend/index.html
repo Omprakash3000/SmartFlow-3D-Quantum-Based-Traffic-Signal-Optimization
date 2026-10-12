@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SmartFlow 3D — Intelligent Urban Traffic Management, Real-time Simulation, and Adaptive Signal Control Platform">
+  <title>SmartFlow 3D — Intelligent Traffic Management</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/three.min.js"></script>
+  <script src="js/OrbitControls.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <a href="#" class="brand-wrapper">
+      <div class="brand-symbol">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div class="brand-titles">
+        <h1>SmartFlow 3D</h1>
+        <p>Intelligent Traffic Management</p>
+      </div>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#simulator">3D Simulator</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#optimization">Optimize Timing</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#explorer">Intersection Explorer</a>
+      <a href="#analytics">Analytics & Reports</a>
+    </nav>
+
+    <div class="nav-actions">
+      <div class="simulation-pill">
+        <div class="pulse-indicator"></div>
+        <span>Simulation Mode: Active Demo</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+
+    <!-- ========================================== -->
+    <!-- SECTION A: Home / Overview Hero           -->
+    <!-- ========================================== -->
+    <section id="overview" class="hero-section">
+      <div class="hero-badge">Urban Mobility Command Center</div>
+      <h1 class="hero-title">Make Every Green Light Count.</h1>
+      <p class="hero-subtitle">
+        Understand traffic conditions, reduce unnecessary waiting, and explore smarter signal timing for more efficient urban mobility.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary" id="btnHeroExplore">
+          <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+          Explore Traffic Simulation
+        </button>
+        <button class="btn btn-accent" id="btnHeroOptimize">
+          <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Optimize Traffic Flow
+        </button>
+      </div>
+
+      <!-- Concise Overview Capabilities -->
+      <div class="capabilities-grid">
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <h3>Real-Time Traffic Monitoring</h3>
+          <p>Continuous vehicle queue tracking, arrival rate tracking, and approach flow measurement.</p>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3>Congestion Analysis</h3>
+          <p>Multi-approach congestion index based on free-flow vs. empirical travel delays.</p>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3>Adaptive Signal Timing</h3>
+          <p>Evaluates coordinated green-wave progression while enforcing safety clearance intervals.</p>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg viewBox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+          </div>
+          <h3>Flow Comparison</h3>
+          <p>Objective baseline-vs-optimized evaluations across queues, waiting times, and throughput.</p>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3>Performance Reporting</h3>
+          <p>Downloadable CSV and printable PDF audits marked with actual simulation parameters.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION B: Interactive 3D Simulator       -->
+    <!-- ========================================== -->
+    <section id="simulator">
+      <div class="section-head">
+        <div>
+          <h2>Interactive 3D Traffic Simulator</h2>
+          <p>Explore a simulated multi-intersection urban corridor with responsive traffic dynamics and signal states.</p>
+        </div>
+        <div style="font-size:0.8rem;color:var(--text-dim)">
+          Hold Left Click: Rotate &bull; Right Click: Pan &bull; Scroll: Zoom
+        </div>
+      </div>
+
+      <div class="simulator-layout">
+        <!-- 3D Canvas Viewport -->
+        <div class="viewport-container">
+          <div class="viewport-hud">
+            <div class="hud-pill">
+              <span>Simulation Clock:</span>
+              <strong id="hudSimTime">0.0s</strong>
+            </div>
+            <div class="hud-pill">
+              <span>Active Vehicles:</span>
+              <strong id="hudActiveVehs">0</strong>
+            </div>
+            <div class="hud-pill">
+              <span id="hudCongestionBadge" style="font-weight:600;color:#34d399">Flow: Fluid</span>
+            </div>
+          </div>
+
+          <div class="camera-controls-bar">
+            <button class="cam-btn active" id="btnCamIso">3D Isometric</button>
+            <button class="cam-btn" id="btnCamAerial">Top-Down Aerial</button>
+            <button class="cam-btn" id="btnCamStreet">Street-Level</button>
+            <button class="cam-btn" id="btnToggle2D">2D Map View</button>
+          </div>
+
+          <!-- 3D WebGL Element Container -->
+          <div id="viewport3D"></div>
+
+          <!-- 2D Canvas Fallback Element -->
+          <canvas id="viewport2D"></canvas>
+        </div>
+
+        <!-- Simulation Configuration Side Panel -->
+        <div class="simulator-controls-panel">
+          <div class="control-card">
+            <h3>
+              <span>Traffic Parameters</span>
+              <span style="font-size:0.75rem;color:var(--cyan-bright)">Simulation Input</span>
+            </h3>
+
+            <!-- Traffic Volume -->
+            <div class="field-group">
+              <div class="field-label">
+                <span>Traffic Volume</span>
+                <span class="val-badge" id="lblVolume">Medium (22 vpm)</span>
+              </div>
+              <div class="segmented-control">
+                <button class="segment-btn" data-volume="low">Low</button>
+                <button class="segment-btn active" data-volume="medium">Medium</button>
+                <button class="segment-btn" data-volume="high">High</button>
+              </div>
+            </div>
+
+            <!-- Traffic Distribution -->
+            <div class="field-group">
+              <div class="field-label">
+                <span>Traffic Distribution</span>
+              </div>
+              <div class="segmented-control">
+                <button class="segment-btn active" data-dist="balanced">Balanced</button>
+                <button class="segment-btn" data-dist="ns_heavy">N–S Heavy</button>
+                <button class="segment-btn" data-dist="ew_heavy">E–W Heavy</button>
+              </div>
+            </div>
+
+            <!-- Vehicle Spawning Rate -->
+            <div class="field-group">
+              <div class="field-label">
+                <span>Vehicle Spawning Rate</span>
+                <span class="val-badge" id="valSpawnRate">22 vpm</span>
+              </div>
+              <input type="range" id="sliderSpawnRate" min="8" max="45" value="22" step="1">
+            </div>
+
+            <!-- Coordinated Network Mode -->
+            <div class="field-group" style="background:rgba(255,255,255,0.03);padding:0.75rem;border-radius:8px">
+              <span style="font-size:0.8rem;color:var(--text-main);font-weight:600;display:block;margin-bottom:2px">Dual Coordinated Arterial Corridor</span>
+              <span style="font-size:0.75rem;color:var(--text-sub)">2 Intersections (West Crossing & East Crossing) connected via 240m synchronized arterial link.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Playback Bar -->
+      <div class="playback-bar">
+        <div class="playback-controls">
+          <button class="icon-btn active-play" id="btnPlay">
+            <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Start Simulation
+          </button>
+          <button class="icon-btn" id="btnPause">
+            <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            Pause
+          </button>
+          <button class="icon-btn" id="btnStep">
+            <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/></svg>
+            Step (+0.5s)
+          </button>
+          <button class="icon-btn" id="btnReset">
+            <svg style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            Reset
+          </button>
+        </div>
+
+        <div class="speed-selector">
+          <span>Simulation Speed:</span>
+          <select id="speedSelect" class="custom-select">
+            <option value="1">1.0x Real-Time</option>
+            <option value="2">2.0x Accelerated</option>
+            <option value="4">4.0x High Speed</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION C: Traffic Monitoring Dashboard    -->
+    <!-- ========================================== -->
+    <section id="dashboard">
+      <div class="section-head">
+        <div>
+          <h2>Traffic Monitoring Dashboard</h2>
+          <p>Authoritative metrics calculated continuously from simulated vehicle kinematics and queue dynamics.</p>
+        </div>
+      </div>
+
+      <!-- 6 Metrics Cards -->
+      <div class="metrics-row">
+        <div class="metric-card">
+          <span class="metric-label">Active Vehicles</span>
+          <div class="metric-number-wrap">
+            <span class="metric-number" id="valCardActiveVehs">0</span>
+            <span class="metric-unit">on network</span>
+          </div>
+          <span class="metric-footnote">&bull; In Transit</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="metric-label">Average Waiting Time</span>
+          <div class="metric-number-wrap">
+            <span class="metric-number" id="valCardWaitTime">0.0</span>
+            <span class="metric-unit">seconds</span>
+          </div>
+          <span class="metric-footnote">&bull; Per Vehicle</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="metric-label">Average Queue Length</span>
+          <div class="metric-number-wrap">
+            <span class="metric-number" id="valCardQueueLen">0.0</span>
+            <span class="metric-unit">vehicles</span>
+          </div>
+          <span class="metric-footnote">&bull; Per Approach</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="metric-label">Traffic Throughput</span>
+          <div class="metric-number-wrap">
+            <span class="metric-number" id="valCardThroughput">0</span>
+            <span class="metric-unit">veh / hour</span>
+          </div>
+          <span class="metric-footnote">&bull; Cleared Flow</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="metric-label">Congestion Level</span>
+          <div class="metric-number-wrap">
+            <span class="metric-number" id="valCardCongestion">0%</span>
+            <span class="metric-unit">index</span>
+          </div>
+          <span class="metric-footnote">&bull; Delay Factor</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="metric-label">Intersection Status</span>
+          <div class="metric-number-wrap">
+            <span class="metric-number" id="valCardIntersectionStatus" style="font-size:1.15rem;font-weight:600">Active</span>
+          </div>
+          <span class="metric-footnote">&bull; Signal Controller</span>
+        </div>
+      </div>
+
+      <!-- Approach Queues Bar -->
+      <div class="approaches-queue-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <h3 style="font-size:0.95rem;font-weight:600">Per-Approach Queue Distribution</h3>
+          <span style="font-size:0.75rem;color:var(--text-dim)">Stop-Bar Queues</span>
+        </div>
+        <div class="queues-horizontal">
+          <div class="queue-col">
+            <div class="queue-col-head">
+              <span>Northbound (NB)</span>
+              <strong id="qNumNB" style="font-family:'JetBrains Mono',monospace">0</strong>
+            </div>
+            <div class="queue-track"><div class="queue-bar-fill nb" id="qBarNB" style="width:0%"></div></div>
+          </div>
+          <div class="queue-col">
+            <div class="queue-col-head">
+              <span>Southbound (SB)</span>
+              <strong id="qNumSB" style="font-family:'JetBrains Mono',monospace">0</strong>
+            </div>
+            <div class="queue-track"><div class="queue-bar-fill sb" id="qBarSB" style="width:0%"></div></div>
+          </div>
+          <div class="queue-col">
+            <div class="queue-col-head">
+              <span>Eastbound (EB - Arterial)</span>
+              <strong id="qNumEB" style="font-family:'JetBrains Mono',monospace">0</strong>
+            </div>
+            <div class="queue-track"><div class="queue-bar-fill eb" id="qBarEB" style="width:0%"></div></div>
+          </div>
+          <div class="queue-col">
+            <div class="queue-col-head">
+              <span>Westbound (WB - Arterial)</span>
+              <strong id="qNumWB" style="font-family:'JetBrains Mono',monospace">0</strong>
+            </div>
+            <div class="queue-track"><div class="queue-bar-fill wb" id="qBarWB" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION D: Signal Timing Optimization     -->
+    <!-- ========================================== -->
+    <section id="optimization">
+      <div class="section-head">
+        <div>
+          <h2>Find a Better Traffic Flow.</h2>
+          <p>Evaluate traffic conditions and compare alternative signal timing plans to identify opportunities to reduce delays.</p>
+        </div>
+      </div>
+
+      <div class="opt-panel-layout">
+        <!-- Constraints & Rules Card -->
+        <div class="opt-info-card">
+          <h3 style="font-size:1.05rem;font-weight:600">Signal Safety Requirements</h3>
+          <p style="font-size:0.84rem;color:var(--text-sub);line-height:1.5;">
+            Signal optimization rigorously adheres to municipal safety standards. Conflicting traffic streams are never granted green simultaneously.
+          </p>
+
+          <div class="safety-checklist">
+            <div class="safety-check-item">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Conflict matrix enforcement: zero simultaneous conflicting green lights.</span>
+            </div>
+            <div class="safety-check-item">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Minimum green duration enforced: 5.0 seconds for driver reaction time.</span>
+            </div>
+            <div class="safety-check-item">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>3.0s yellow warning interval & 2.0s all-red clearance between all phase changes.</span>
+            </div>
+            <div class="safety-check-item">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Pedestrian crossing clearance intervals guaranteed.</span>
+            </div>
+          </div>
+
+          <button class="btn btn-accent" id="btnRunOptimization" style="font-size:1rem;padding:0.85rem 1.8rem;margin-top:0.5rem">
+            <svg style="width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Optimize Signal Timing
+          </button>
+        </div>
+
+        <!-- Optimization Status & Application Card -->
+        <div class="opt-results-card">
+          <h3 style="font-size:1.05rem;font-weight:600">Adaptive Signal Plan Status</h3>
+
+          <div class="opt-status-banner">
+            <svg style="width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span id="optStatusText">Click "Optimize Signal Timing" to evaluate live traffic conditions and propose coordinated green-wave splits.</span>
+          </div>
+
+          <div style="font-size:0.84rem;color:var(--text-sub);line-height:1.5;">
+            When optimization is initiated, the system evaluates alternative timing plans against current approach queues, applies the most efficient valid schedule to the simulated corridor, and visually updates signal phase timings.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION E: Before & After Comparison      -->
+    <!-- ========================================== -->
+    <section id="comparison">
+      <div class="section-head">
+        <div>
+          <h2>Before-and-After Comparison</h2>
+          <p>Measure real improvements between the Current Fixed Signal Plan and the Optimized Adaptive Signal Plan.</p>
+        </div>
+
+        <div class="comp-view-switcher">
+          <button class="cam-btn" data-compmode="baseline">Baseline Traffic</button>
+          <button class="cam-btn" data-compmode="optimized">Optimized Traffic</button>
+          <button class="cam-btn active" data-compmode="side_by_side">Side-by-Side Comparison</button>
+        </div>
+      </div>
+
+      <div class="comparison-container">
+        <!-- Comparison Table -->
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Performance Metric</th>
+              <th>Current Fixed Plan</th>
+              <th>Optimized Signal Plan</th>
+              <th>Measured Improvement</th>
+            </tr>
+          </thead>
+          <tbody id="compTableBody">
+            <tr>
+              <td><strong>Average Vehicle Waiting Time</strong></td>
+              <td>24.5 <span style="font-size:0.75em;color:var(--text-dim)">seconds</span></td>
+              <td style="color:#38bdf8;font-weight:700">14.8 <span style="font-size:0.75em;color:var(--text-dim)">seconds</span></td>
+              <td><span class="badge-gain">-39.6% Delay Reduction</span></td>
+            </tr>
+            <tr>
+              <td><strong>Average Approach Queue Length</strong></td>
+              <td>8.2 <span style="font-size:0.75em;color:var(--text-dim)">vehicles</span></td>
+              <td style="color:#38bdf8;font-weight:700">4.6 <span style="font-size:0.75em;color:var(--text-dim)">vehicles</span></td>
+              <td><span class="badge-gain">-43.9% Queue Decrease</span></td>
+            </tr>
+            <tr>
+              <td><strong>Traffic Flow Throughput</strong></td>
+              <td>650.0 <span style="font-size:0.75em;color:var(--text-dim)">veh / hour</span></td>
+              <td style="color:#38bdf8;font-weight:700">980.0 <span style="font-size:0.75em;color:var(--text-dim)">veh / hour</span></td>
+              <td><span class="badge-gain">+50.8% Flow Capacity</span></td>
+            </tr>
+            <tr>
+              <td><strong>Congestion Delay Index</strong></td>
+              <td>0.42 <span style="font-size:0.75em;color:var(--text-dim)">factor</span></td>
+              <td style="color:#38bdf8;font-weight:700">0.18 <span style="font-size:0.75em;color:var(--text-dim)">factor</span></td>
+              <td><span class="badge-gain">-57.1% Congestion Relieved</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Visual Signal Phase Allocation Timeline -->
+        <div>
+          <h4 style="font-size:0.9rem;font-weight:600;margin-bottom:0.75rem;color:var(--text-main)">Signal Phase Allocation Over Planning Horizon</h4>
+          <div class="timeline-block-row">
+            <div class="timeline-line">
+              <span class="timeline-line-label">Baseline Plan:</span>
+              <div class="timeline-bar-strip" id="trackBaseline">
+                <div class="t-slot ns" style="flex:1">NS</div>
+                <div class="t-slot ns" style="flex:1">NS</div>
+                <div class="t-slot ew" style="flex:1">EW</div>
+                <div class="t-slot ew" style="flex:1">EW</div>
+                <div class="t-slot ns" style="flex:1">NS</div>
+                <div class="t-slot ns" style="flex:1">NS</div>
+                <div class="t-slot ew" style="flex:1">EW</div>
+                <div class="t-slot ew" style="flex:1">EW</div>
+              </div>
+            </div>
+
+            <div class="timeline-line">
+              <span class="timeline-line-label">Optimized Plan:</span>
+              <div class="timeline-bar-strip" id="trackOptimized">
+                <div class="t-slot ns" style="flex:1">NS</div>
+                <div class="t-slot ew" style="flex:1">EW</div>
+                <div class="t-slot ew" style="flex:1">EW</div>
+                <div class="t-slot ew" style="flex:1">EW</div>
+                <div class="t-slot ns" style="flex:1">NS</div>
+                <div class="t-slot ns" style="flex:1">NS</div>
+                <div class="t-slot ew" style="flex:1">EW</div>
+                <div class="t-slot ns" style="flex:1">NS</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;gap:1.5rem;font-size:0.76rem;color:var(--text-dim);margin-top:0.4rem;">
+            <span><span style="display:inline-block;width:10px;height:10px;background:#0284c7;border-radius:2px;vertical-align:middle;margin-right:5px"></span>North-South Green Phase</span>
+            <span><span style="display:inline-block;width:10px;height:10px;background:#059669;border-radius:2px;vertical-align:middle;margin-right:5px"></span>East-West Arterial Green Phase</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION F: Intersection Explorer          -->
+    <!-- ========================================== -->
+    <section id="explorer">
+      <div class="section-head">
+        <div>
+          <h2>Intersection Explorer</h2>
+          <p>Select any intersection on the network to inspect its approach queues, signal phase, and timing plan.</p>
+        </div>
+      </div>
+
+      <div class="explorer-layout">
+        <!-- Intersection Selection List -->
+        <div class="intersection-list">
+          <div class="int-item-card selected" data-intersection="INT_1">
+            <div class="int-item-title">
+              <span>West Crossing</span>
+              <span style="color:var(--cyan-bright)">INT_1</span>
+            </div>
+            <div class="int-item-sub">Arterial Junction West &bull; Coordinated Corridor Link</div>
+          </div>
+
+          <div class="int-item-card" data-intersection="INT_2">
+            <div class="int-item-title">
+              <span>East Crossing</span>
+              <span style="color:var(--cyan-bright)">INT_2</span>
+            </div>
+            <div class="int-item-sub">Arterial Junction East &bull; Coordinated Corridor Link</div>
+          </div>
+        </div>
+
+        <!-- Intersection Detailed Inspector Panel -->
+        <div class="intersection-detail-panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:0.75rem;">
+            <div>
+              <h3 id="expIntTitle" style="font-size:1.15rem;font-weight:700">West Crossing (INT_1)</h3>
+              <p id="expPhaseTitle" style="font-size:0.84rem;color:var(--cyan-bright)">Phase 1: North-South Green Flow</p>
+            </div>
+            <div style="font-size:0.8rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace">Cycle: 60s</div>
+          </div>
+
+          <!-- Approach Signal Indicators -->
+          <div>
+            <h4 style="font-size:0.85rem;color:var(--text-sub);margin-bottom:0.75rem">Current Approach Signal States</h4>
+            <div class="signal-status-lights">
+              <div class="signal-approach-box">
+                <span style="font-size:0.8rem;font-weight:600">Northbound (NB)</span>
+                <div class="sig-lamp-indicator green" id="expLightNB"></div>
+                <span id="expQueueNB" style="font-size:0.75rem;color:var(--text-sub)">4 queued</span>
+              </div>
+              <div class="signal-approach-box">
+                <span style="font-size:0.8rem;font-weight:600">Southbound (SB)</span>
+                <div class="sig-lamp-indicator green" id="expLightSB"></div>
+                <span id="expQueueSB" style="font-size:0.75rem;color:var(--text-sub)">3 queued</span>
+              </div>
+              <div class="signal-approach-box">
+                <span style="font-size:0.8rem;font-weight:600">Eastbound (EB)</span>
+                <div class="sig-lamp-indicator red" id="expLightEB"></div>
+                <span id="expQueueEB" style="font-size:0.75rem;color:var(--text-sub)">7 queued</span>
+              </div>
+              <div class="signal-approach-box">
+                <span style="font-size:0.8rem;font-weight:600">Westbound (WB)</span>
+                <div class="sig-lamp-indicator red" id="expLightWB"></div>
+                <span id="expQueueWB" style="font-size:0.75rem;color:var(--text-sub)">6 queued</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION G: Analytics and Reports          -->
+    <!-- ========================================== -->
+    <section id="analytics">
+      <div class="section-head">
+        <div>
+          <h2>Analytics and Reports</h2>
+          <p>Inspect real-time trend series and export empirical simulation logs.</p>
+        </div>
+      </div>
+
+      <div class="analytics-container">
+        <!-- Filter and Action Bar -->
+        <div class="analytics-filter-bar">
+          <div style="display:flex;align-items:center;gap:1rem">
+            <span style="font-size:0.84rem;color:var(--text-sub)">Scope:</span>
+            <select class="custom-select" id="analyticsIntSelect">
+              <option value="all">Entire Network (Both Intersections)</option>
+              <option value="INT_1">West Crossing (INT_1)</option>
+              <option value="INT_2">East Crossing (INT_2)</option>
+            </select>
+          </div>
+
+          <div style="display:flex;gap:0.75rem">
+            <button class="btn btn-secondary" id="btnExportCSV">
+              <svg style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Export CSV Report
+            </button>
+            <button class="btn btn-primary" id="btnPrintReport">
+              <svg style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+              Export Printable Report / PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Trend Charts -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <h4>
+              <span>Waiting Time Trend</span>
+              <span style="font-size:0.75rem;color:var(--blue-sky);font-family:'JetBrains Mono'">Average Seconds / Veh</span>
+            </h4>
+            <div class="chart-svg-wrap" id="chartWaitTime"></div>
+          </div>
+
+          <div class="chart-card">
+            <h4>
+              <span>Queue Length Trend</span>
+              <span style="font-size:0.75rem;color:var(--cyan-bright);font-family:'JetBrains Mono'">Average Vehicles / Approach</span>
+            </h4>
+            <div class="chart-svg-wrap" id="chartQueueLen"></div>
+          </div>
+
+          <div class="chart-card">
+            <h4>
+              <span>Throughput Trend</span>
+              <span style="font-size:0.75rem;color:var(--green-sig);font-family:'JetBrains Mono'">Vehicles Cleared / Hour</span>
+            </h4>
+            <div class="chart-svg-wrap" id="chartThroughput"></div>
+          </div>
+
+          <div class="chart-card">
+            <h4>
+              <span>Congestion Level Trend</span>
+              <span style="font-size:0.75rem;color:var(--amber-sig);font-family:'JetBrains Mono'">Delay Ratio Percentage</span>
+            </h4>
+            <div class="chart-svg-wrap" id="chartCongestion"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Printable Simulation Report Modal -->
+  <div class="modal-overlay" id="modalPrintReport">
+    <div class="modal-paper" id="printableReport">
+      <div class="modal-head-row">
+        <div>
+          <h2 style="font-size:1.4rem;font-weight:700">SmartFlow 3D — Simulation Performance Report</h2>
+          <p style="font-size:0.8rem;color:var(--text-sub)">Autonomous Micro-Simulation Demo &bull; Verified Empirical Log</p>
+        </div>
+        <button class="close-btn" id="btnClosePrintModal">&times;</button>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:1.25rem;font-size:0.88rem;color:var(--text-main)">
+        <div style="background:rgba(255,255,255,0.03);padding:1rem;border-radius:8px;display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem">
+          <div>Report Timestamp: <strong id="reportDate">-</strong></div>
+          <div>Mode: <strong>Simulation Mode (Autonomous Demo)</strong></div>
+          <div>Network Layout: <strong>Dual Coordinated Arterial Corridor</strong></div>
+          <div>Safety Compliance: <strong style="color:var(--green-sig)">100% Conflict-Free & Cleared</strong></div>
+        </div>
+
+        <div>
+          <h4 style="font-size:0.95rem;font-weight:700;margin-bottom:0.5rem">Measured Performance Summary</h4>
+          <table style="width:100%;border-collapse:collapse;font-size:0.85rem">
+            <tr><td style="padding:6px 0">Average Vehicle Waiting Time:</td><td><strong id="reportWait">-</strong></td></tr>
+            <tr><td style="padding:6px 0">Average Approach Queue Length:</td><td><strong id="reportQueue">-</strong></td></tr>
+            <tr><td style="padding:6px 0">Throughput Capacity:</td><td><strong id="reportThru">-</strong></td></tr>
+            <tr><td style="padding:6px 0">Network Congestion Level:</td><td><strong id="reportCong">-</strong></td></tr>
+          </table>
+        </div>
+
+        <div style="font-size:0.78rem;color:var(--text-dim);border-top:1px solid rgba(255,255,255,0.08);padding-top:0.75rem">
+          Note: This document contains actual simulated traffic state metrics recorded during session execution. Marked clearly as Simulation Demo Traffic Data.
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;gap:1rem;margin-top:0.5rem">
+          <button class="btn btn-primary" id="btnTriggerBrowserPrint">Print or Save as PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="smart-footer">
+    <div>SmartFlow 3D &copy; 2026. All rights reserved.</div>
+    <div>Simulation Mode &bull; Autonomous Urban Mobility Demo</div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/simulator3d.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

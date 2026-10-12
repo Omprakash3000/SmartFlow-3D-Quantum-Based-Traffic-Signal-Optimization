@@ -1,0 +1,12 @@
+{
+  "name": "smartflow3d",
+  "version": "1.0.0",
+  "description": "SmartFlow 3D - Urban Traffic Simulation & Optimization Platform",
+  "scripts": {
+    "backend:dev": "python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload",
+    "backend:test": "python -m pytest backend/tests -v",
+    "frontend:dev": "npx -y serve frontend -p 3000",
+    "start": "python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000"
+  },
+  "license": "UNLICENSED"
+}
